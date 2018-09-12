@@ -1,0 +1,66 @@
+{
+  "name": "@yutahaga/vue-media-breakpoints",
+  "version": "0.0.1",
+  "description": "A plugin of Vue that store current viewport size name.",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "lib/index.d.js",
+  "files": [
+    "lib",
+    "lib-esm",
+    "dist"
+  ],
+  "homepage": "https://github.com/yutahaga/vue-media-breakpoints",
+  "bugs": "https://github.com/yutahagavue-media-breakpoints/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yutahaga/vue-media-breakpoints.git"
+  },
+  "keywords": [
+    "vue",
+    "vue plugin",
+    "media queries"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc -p src && tsc -p src -m es6 --outDir lib-esm && webpack",
+    "clean": "rimraf lib lib-esm dist",
+    "dev": "jest --watch",
+    "lint": "tslint -p . && prettier --list-different \"{src,tests}/**/*.ts\"",
+    "format": "prettier --write \"{src,tests}/**/*.ts\"",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "jest"
+  },
+  "dependencies": {
+    "vue": "^2.5.17"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.2",
+    "@types/lodash.debounce": "^4.0.4",
+    "@types/node": "^10.9.4",
+    "@types/webpack": "^4.4.11",
+    "@vue/test-utils": "^1.0.0-beta.25",
+    "awesome-typescript-loader": "^5.2.1",
+    "jest": "^23.6.0",
+    "lint-staged": "^7.2.2",
+    "lodash.debounce": "^4.0.8",
+    "prettier": "^1.14.2",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^23.1.4",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.1.0-dev.20180912",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.18.0",
+    "webpack-cli": "^3.1.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run test",
+      "git add"
+    ]
+  }
+}
