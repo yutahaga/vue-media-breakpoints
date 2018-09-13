@@ -5,7 +5,7 @@ export {
   BreakPointManagerOptions,
   BreakPointsOption,
   getClientWidth,
-  install as default,
+  install,
   PluginOptions
 } from './breakpoint';
 export {

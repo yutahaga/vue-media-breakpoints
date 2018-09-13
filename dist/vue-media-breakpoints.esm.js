@@ -1,4 +1,51 @@
-import { addEventListenerWithOptions } from './listener';
+/*!
+ * Vue Media Break-Points v0.0.2
+ * https://github.com/yutahaga/vue-media-breakpoints
+ *
+ * @license
+ * Copyright (c) 2018 undefined
+ * Released under the MIT license
+ * https://github.com/yutahaga/vue-media-breakpoints/blob/master/LICENSE
+ */
+/**
+ * Used to detect browser support for adding an event listener with options
+ * Credit: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+ */
+var supportsCaptureOption = (function () {
+    var test = false;
+    try {
+        var opts = Object.defineProperty({}, 'capture', {
+            get: function () {
+                test = true;
+            }
+        });
+        window.addEventListener('test', null, opts);
+    }
+    catch (e) { } /* tslint:disable-line no-empty */
+    return test;
+})();
+/**
+ * Helper to create a safety event listener options
+ *
+ */
+var createSafetyEventListenerOptions = function (options) {
+    return !supportsCaptureOption && typeof options === 'object'
+        ? options.capture
+        : options;
+};
+/**
+ * Helper to add an event listener with an options object in supported browsers
+ */
+var addEventListenerWithOptions = function (target, type, listener, options) {
+    target.addEventListener(type, listener, createSafetyEventListenerOptions(options));
+};
+/**
+ * Helper to remove an event listener with an options object in supported browsers
+ */
+var removeEventListenerWithOptions = function (target, type, listener, options) {
+    target.removeEventListener(type, listener, createSafetyEventListenerOptions(options));
+};
+
 var _Vue; // tslint:disable-line variable-name
 var BreakPointManager = /** @class */ (function () {
     function BreakPointManager(options) {
@@ -68,14 +115,13 @@ var BreakPointManager = /** @class */ (function () {
     };
     return BreakPointManager;
 }());
-export { BreakPointManager };
-export function getClientWidth() {
+function getClientWidth() {
     if (typeof document === 'undefined') {
         return 0;
     }
     return Math.max(document.documentElement ? document.documentElement.clientWidth : 0, window.innerWidth || 0);
 }
-export function install(InjectedVue, options) {
+function install(InjectedVue, options) {
     if (process.env.NODE_ENV !== 'production' && _Vue) {
         throw new Error('[vue-media-breakpoints] Vue Media Break-Points is already installed');
     }
@@ -88,3 +134,5 @@ export function install(InjectedVue, options) {
         }
     });
 }
+
+export { BreakPointManager, getClientWidth, install, addEventListenerWithOptions, createSafetyEventListenerOptions, removeEventListenerWithOptions, supportsCaptureOption };

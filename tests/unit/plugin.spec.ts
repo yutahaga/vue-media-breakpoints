@@ -29,7 +29,7 @@ test('Basic', async () => {
     lg: 960
   };
 
-  const { default: Plugin } = await import('../../src/');
+  const { install: Plugin } = await import('../../src/');
 
   const localVue = createLocalVue();
   localVue.use(Plugin, {
@@ -74,7 +74,7 @@ test('Debounce', async () => {
     lg: 960
   };
 
-  const { default: Plugin } = await import('../../src/');
+  const { install: Plugin } = await import('../../src/');
 
   const localVue = createLocalVue();
   localVue.use(Plugin, {
