@@ -53,7 +53,7 @@ const vm = new Vue({
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $bp: BreakPoint<GRID_BREAKPOINTS>;
+    $bp: BreakPoint<typeof GRID_BREAKPOINTS>;
   }
 }
 ```
