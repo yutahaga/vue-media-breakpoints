@@ -24,7 +24,7 @@ yarn add @yutahaga/vue-media-breakpoints
 
 ```js
 import Vue from 'vue';
-import { install as MediaBreakPointsPlugin } from '@yutahaga/vue-media-breakpoints';
+import { install as MediaBreakPointsPlugin, BreakPoint } from '@yutahaga/vue-media-breakpoints';
 import debounce from 'lodash.debounce';
 
 const GRID_BREAKPOINTS = {
@@ -50,4 +50,10 @@ const vm = new Vue({
     </div>
   `
 });
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $bp: BreakPoint<GRID_BREAKPOINTS>;
+  }
+}
 ```

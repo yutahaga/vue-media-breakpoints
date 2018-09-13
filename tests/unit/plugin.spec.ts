@@ -3,6 +3,11 @@ import debounce from 'lodash.debounce';
 import Vue, { CreateElement } from 'vue';
 
 declare var global: any;
+declare module 'vue/types/vue' {
+  interface Vue {
+    $bp: any;
+  }
+}
 
 function sleep(time: number) {
   return new Promise((resolve, reject) => {

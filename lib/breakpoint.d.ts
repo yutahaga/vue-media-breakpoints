@@ -2,28 +2,28 @@ import Vue from 'vue';
 export interface BreakPointsOption {
     [key: string]: number;
 }
-export interface BreakPoint {
-    name: string | null;
-    width: number;
+export interface BreakPoint<T extends BreakPointsOption> {
+    name: keyof T;
+    width: T[keyof T];
 }
-export declare type BreakPointListener = (breakPoint: BreakPoint) => any;
-export interface BreakPointManagerOptions {
-    breakPoints: BreakPointsOption;
-    debounceFunction?: <T extends BreakPointListener>(listener: T, interval: number) => T;
+export declare type BreakPointListener<K> = <T extends BreakPointsOption>(breakPoint: BreakPoint<T>) => any;
+export interface BreakPointManagerOptions<T> {
+    breakPoints: T;
+    debounceFunction?: <K extends BreakPointListener<T>>(listener: K, interval: number) => K;
     debounceInterval?: number;
 }
-export declare class BreakPointManager {
+export declare class BreakPointManager<T extends BreakPointsOption> {
     private options;
     private vm;
     private bpKeys;
-    constructor(options: BreakPointManagerOptions);
-    readonly name: string | null;
-    readonly width: number;
+    constructor(options: BreakPointManagerOptions<T>);
+    readonly name: keyof T;
+    readonly width: T[keyof T];
     private setBreakPoint;
     private setupVM;
     private setupEventListener;
     private updateBreakPoint;
 }
 export declare function getClientWidth(): number;
-export declare type PluginOptions = BreakPointManagerOptions;
-export declare function install(InjectedVue: typeof Vue, options: PluginOptions): void;
+export declare type PluginOptions<T> = BreakPointManagerOptions<T>;
+export declare function install<T extends BreakPointsOption>(InjectedVue: typeof Vue, options: PluginOptions<T>): void;
