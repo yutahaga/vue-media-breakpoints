@@ -38,7 +38,6 @@ const GRID_BREAKPOINTS = {
 Vue.use(MediaBreakPointsPlugin, {
   breakPoints: GRID_BREAKPOINTS,
   debounceFunction: debounce,
-  debounceFunction: debounce,
   debounceInterval: 30,
 });
 
