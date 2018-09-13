@@ -58,7 +58,7 @@ export class BreakPointManager {
   private setupVM(): void {
     this.vm = new _Vue({
       data: { name: '', width: -1 }
-    });
+    }) as Vue & { $data: BreakPoint };
   }
 
   private setupEventListener(): void {
@@ -128,7 +128,7 @@ export function install(InjectedVue: typeof Vue, options: PluginOptions): void {
   _Vue.mixin({
     beforeCreate(this: Vue): void {
       type Component = Vue & {
-        $bp: InstanceType<typeof BreakPointManager>;
+        $bp: BreakPointManager;
         $parent: Component;
       };
       const vm = this as Component;

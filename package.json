@@ -3,7 +3,9 @@
   "version": "0.0.2",
   "description": "A plugin of Vue that store current viewport size name.",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "module": "lib-esm/index.js",
+  "unpkg": "dist/index.js",
   "types": "lib/index.d.js",
   "files": [
     "lib",
