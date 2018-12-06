@@ -52,6 +52,21 @@ export class BreakPointManager<T extends BreakPointsOption> {
     return this.vm.$data.width;
   }
 
+  public above(bp: keyof T) {
+    return this.width > this.options.breakPoints[bp];
+  }
+
+  public below(bp: keyof T) {
+    return this.width < this.options.breakPoints[bp];
+  }
+
+  public equal(bp: keyof T | Array<keyof T>) {
+    if (Array.isArray(bp)) {
+      return bp.some(a => this.width === this.options.breakPoints[a]);
+    }
+    return this.width === this.options.breakPoints[bp];
+  }
+
   private setBreakPoint(bp: BreakPoint<T>): void {
     this.vm.$data.name = bp.name;
     this.vm.$data.width = bp.width;

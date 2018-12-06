@@ -53,18 +53,24 @@ test('Basic', async () => {
   });
 
   expect(wrapper.vm.$bp.name).toBe('xs');
+  expect(wrapper.vm.$bp.below('sm')).toBe(true);
 
   await resizeWindow(localVue, 580);
 
   expect(wrapper.vm.$bp.name).toBe('sm');
+  expect(wrapper.vm.$bp.below('lg')).toBe(true);
 
   await resizeWindow(localVue, 820);
 
   expect(wrapper.vm.$bp.name).toBe('md');
+  expect(wrapper.vm.$bp.above('lg')).toBe(false);
+  expect(wrapper.vm.$bp.above('sm')).toBe(true);
+  expect(wrapper.vm.$bp.equal('md')).toBe(true);
 
   await resizeWindow(localVue, 1280);
 
   expect(wrapper.vm.$bp.name).toBe('lg');
+  expect(wrapper.vm.$bp.equal(['sm', 'lg'])).toBe(true);
 });
 
 test('Debounce', async () => {

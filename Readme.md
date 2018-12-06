@@ -45,7 +45,19 @@ const vm = new Vue({
   el: '#app',
   template: `
     <div>
-      {{ $bp.name }}: {{ $bp.width }}px
+      <p>{{ $bp.name }}: {{ $bp.width }}px</p>
+      <p v-if="$bp.above('sm')">
+        This tag is displayed only when the viewport is md ~ xl.
+      </p>
+      <p v-if="$bp.below('md')">
+        This tag is displayed only when the viewport is xs ~ sm.
+      </p>
+      <p v-if="$bp.equal('lg')">
+        This tag is displayed only when the viewport is lg.
+      </p>
+      <p v-if="$bp.equal(['xs', 'xl'])">
+        This tag is displayed only when the viewport is xs and xl.
+      </p>
     </div>
   `
 });

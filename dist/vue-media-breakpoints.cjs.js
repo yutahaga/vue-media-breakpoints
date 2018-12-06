@@ -1,5 +1,5 @@
 /*!
- * Vue Media Break-Points v0.0.2
+ * Vue Media Break-Points v0.1.1
  * https://github.com/yutahaga/vue-media-breakpoints
  *
  * @license
@@ -82,6 +82,19 @@ var BreakPointManager = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    BreakPointManager.prototype.above = function (bp) {
+        return this.width > this.options.breakPoints[bp];
+    };
+    BreakPointManager.prototype.below = function (bp) {
+        return this.width < this.options.breakPoints[bp];
+    };
+    BreakPointManager.prototype.equal = function (bp) {
+        var _this = this;
+        if (Array.isArray(bp)) {
+            return bp.some(function (a) { return _this.width === _this.options.breakPoints[a]; });
+        }
+        return this.width === this.options.breakPoints[bp];
+    };
     BreakPointManager.prototype.setBreakPoint = function (bp) {
         this.vm.$data.name = bp.name;
         this.vm.$data.width = bp.width;
