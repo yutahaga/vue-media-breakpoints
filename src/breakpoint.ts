@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import { addEventListenerWithOptions } from './listener';
 
 let _Vue: typeof Vue; // tslint:disable-line variable-name
 
@@ -90,7 +89,7 @@ export class BreakPointManager<T extends BreakPointsOption> {
         )
       : this.updateBreakPoint;
 
-    addEventListenerWithOptions(window, 'resize', callback.bind(this));
+    window.addEventListener('resize', callback.bind(this), { passive: true });
   }
 
   private updateBreakPoint(): void {
