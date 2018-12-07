@@ -95,8 +95,13 @@ export class BreakPointManager<T extends BreakPointsOption> {
   private updateBreakPoint(): void {
     const clientWidth = getClientWidth();
 
+    interface InitialBreakPoint {
+      name: '';
+      width: -1;
+    }
+
     const newBreakPoint = (this.bpKeys.reduce(
-      (acc: BreakPoint<T>, name, index) => {
+      (acc: InitialBreakPoint | BreakPoint<T>, name, index) => {
         const bpWidth = this.options.breakPoints[name];
 
         if (bpWidth < clientWidth) {
