@@ -77,6 +77,16 @@ export class BreakPointManager<T extends BreakPointsOption> {
     return this.width === this.options.breakPoints[bp]
   }
 
+  public between(bp1: keyof T, bp2: keyof T, ssrFallback: boolean = false) {
+    if (isServer) {
+      return ssrFallback
+    }
+    return (
+      this.options.breakPoints[bp1] <= this.width &&
+      this.width < this.options.breakPoints[bp2]
+    )
+  }
+
   private setBreakPoint(bp: BreakPoint<T>): void {
     this.vm.$data.name = bp.name
     this.vm.$data.width = bp.width
