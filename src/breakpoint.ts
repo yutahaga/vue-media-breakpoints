@@ -60,11 +60,25 @@ export class BreakPointManager<T extends BreakPointsOption> {
     return this.width > this.options.breakPoints[bp]
   }
 
+  public orAbove(bp: keyof T, ssrFallback: boolean = false) {
+    if (isServer) {
+      return ssrFallback
+    }
+    return this.width >= this.options.breakPoints[bp]
+  }
+
   public below(bp: keyof T, ssrFallback: boolean = false) {
     if (isServer) {
       return ssrFallback
     }
     return this.width < this.options.breakPoints[bp]
+  }
+
+  public orBelow(bp: keyof T, ssrFallback: boolean = false) {
+    if (isServer) {
+      return ssrFallback
+    }
+    return this.width <= this.options.breakPoints[bp]
   }
 
   public equal(bp: keyof T | Array<keyof T>, ssrFallback: boolean = false) {

@@ -2,9 +2,9 @@
 
 ## Features
 
-* Not using Vue's private API.
-* Using Passive Event Listeners.
-* You can use a custom debouncing function.
+- Not using Vue's private API.
+- Using Passive Event Listeners.
+- You can use a custom debouncing function.
 
 ## Getting Started
 
@@ -49,7 +49,7 @@ const vm = new Vue({
       <p v-if="$bp.above('sm')">
         This tag is displayed only when the viewport is md ~ xl.
       </p>
-      <p v-if="$bp.below('md')">
+      <p v-if="$bp.below('md', true /* SSR Fallback. Default fallback is false */)">
         This tag is displayed only when the viewport is xs ~ sm.
       </p>
       <p v-if="$bp.equal('lg')">
@@ -57,6 +57,15 @@ const vm = new Vue({
       </p>
       <p v-if="$bp.equal(['xs', 'xl'])">
         This tag is displayed only when the viewport is xs and xl.
+      </p>
+      <p v-if="$bp.between('sm', 'lg')">
+        This tag is displayed only when the viewport is between sm and lg. (sm <= ViewPort < lg)
+      </p>
+      <p v-if="$bp.orAbove('sm')">
+        This tag is displayed only when the viewport is sm or above.
+      </p>
+      <p v-if="$bp.orBelow('sm')">
+        This tag is displayed only when the viewport is sm or below.
       </p>
     </div>
   `

@@ -20,8 +20,11 @@ export declare class BreakPointManager<T extends BreakPointsOption> {
     readonly name: keyof T;
     readonly width: T[keyof T];
     above(bp: keyof T, ssrFallback?: boolean): boolean;
+    orAbove(bp: keyof T, ssrFallback?: boolean): boolean;
     below(bp: keyof T, ssrFallback?: boolean): boolean;
+    orBelow(bp: keyof T, ssrFallback?: boolean): boolean;
     equal(bp: keyof T | Array<keyof T>, ssrFallback?: boolean): boolean;
+    between(bp1: keyof T, bp2: keyof T, ssrFallback?: boolean): boolean;
     private setBreakPoint;
     private setupVM;
     private setupEventListener;
