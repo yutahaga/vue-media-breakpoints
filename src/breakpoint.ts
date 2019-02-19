@@ -2,6 +2,8 @@ import Vue from 'vue';
 
 let _Vue: typeof Vue; // tslint:disable-line variable-name
 
+const isServer = typeof window === 'undefined';
+
 export interface BreakPointsOption {
   [key: string]: number;
 }
@@ -51,15 +53,24 @@ export class BreakPointManager<T extends BreakPointsOption> {
     return this.vm.$data.width;
   }
 
-  public above(bp: keyof T) {
+  public above(bp: keyof T, ssrFallback: boolean = false) {
+    if (isServer) {
+      return ssrFallback;
+    }
     return this.width > this.options.breakPoints[bp];
   }
 
-  public below(bp: keyof T) {
+  public below(bp: keyof T, ssrFallback: boolean = false) {
+    if (isServer) {
+      return ssrFallback;
+    }
     return this.width < this.options.breakPoints[bp];
   }
 
-  public equal(bp: keyof T | Array<keyof T>) {
+  public equal(bp: keyof T | Array<keyof T>, ssrFallback: boolean = false) {
+    if (isServer) {
+      return ssrFallback;
+    }
     if (Array.isArray(bp)) {
       return bp.some(a => this.width === this.options.breakPoints[a]);
     }
@@ -78,7 +89,7 @@ export class BreakPointManager<T extends BreakPointsOption> {
   }
 
   private setupEventListener(): void {
-    if (typeof document === 'undefined') {
+    if (isServer) {
       return;
     }
 
