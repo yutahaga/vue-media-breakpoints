@@ -139,7 +139,7 @@ export class BreakPointManager<T extends BreakPointsOption> {
       (acc: InitialBreakPoint | BreakPoint<T>, name, index) => {
         const bpWidth = this.options.breakPoints[name]
 
-        if (bpWidth < clientWidth) {
+        if (bpWidth <= clientWidth) {
           return {
             name,
             width: bpWidth
