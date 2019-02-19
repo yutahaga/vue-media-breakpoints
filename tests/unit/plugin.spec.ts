@@ -111,7 +111,7 @@ test('Debounce', async () => {
 
   expect(wrapper.vm.$bp.name).toBe('xs');
 
-  await sleep(30);
+  await sleep(200);
 
   expect(wrapper.vm.$bp.name).toBe('sm');
 
@@ -119,12 +119,12 @@ test('Debounce', async () => {
 
   expect(wrapper.vm.$bp.name).toBe('sm');
 
-  await sleep(30);
+  await sleep(200);
 
   expect(wrapper.vm.$bp.name).toBe('md');
 
   await resizeWindow(localVue, 1280);
-  await sleep(30);
+  await sleep(200);
 
   expect(wrapper.vm.$bp.name).toBe('lg');
 });
