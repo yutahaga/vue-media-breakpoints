@@ -1,6 +1,6 @@
 {
   "name": "@yutahaga/vue-media-breakpoints",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A plugin of Vue that store current viewport size name.",
   "license": "MIT",
   "main": "dist/vue-media-breakpoints.cjs.js",
