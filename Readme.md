@@ -22,6 +22,9 @@ yarn add @yutahaga/vue-media-breakpoints
 
 ### Usage
 
+When supporting SSR, avoid using `v-if` and use `v-show`.
+Note that `v-show` does not support the `<template>` element, nor does it work with `v-else`.
+
 ```js
 import { install as MediaBreakPointsPlugin, BreakPointManager } from '@yutahaga/vue-media-breakpoints';
 import debounce from 'lodash.debounce';
@@ -46,25 +49,25 @@ const vm = new Vue({
   template: `
     <div>
       <p>{{ $bp.name }}: {{ $bp.width }}px</p>
-      <p v-if="$bp.above('sm')">
+      <p v-show="$bp.above('sm')">
         This tag is displayed only when the viewport is md ~ xl.
       </p>
-      <p v-if="!$bp.below('md', false /* SSR Fallback. Default fallback is true */)">
+      <p v-show="!$bp.below('md', false /* SSR Fallback. Default fallback is true */)">
         This tag is displayed only when the viewport is xs ~ sm.
       </p>
-      <p v-if="$bp.equal('lg')">
+      <p v-show="$bp.equal('lg')">
         This tag is displayed only when the viewport is lg.
       </p>
-      <p v-if="$bp.equal(['xs', 'xl'])">
+      <p v-show="$bp.equal(['xs', 'xl'])">
         This tag is displayed only when the viewport is xs and xl.
       </p>
-      <p v-if="$bp.between('sm', 'lg')">
+      <p v-show="$bp.between('sm', 'lg')">
         This tag is displayed only when the viewport is between sm and lg. (sm <= ViewPort < lg)
       </p>
-      <p v-if="$bp.orAbove('sm')">
+      <p v-show="$bp.orAbove('sm')">
         This tag is displayed only when the viewport is sm or above.
       </p>
-      <p v-if="$bp.orBelow('sm')">
+      <p v-show="$bp.orBelow('sm')">
         This tag is displayed only when the viewport is sm or below.
       </p>
     </div>
