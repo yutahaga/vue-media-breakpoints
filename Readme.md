@@ -49,7 +49,7 @@ const vm = new Vue({
       <p v-if="$bp.above('sm')">
         This tag is displayed only when the viewport is md ~ xl.
       </p>
-      <p v-if="$bp.below('md', true /* SSR Fallback. Default fallback is false */)">
+      <p v-if="!$bp.below('md', false /* SSR Fallback. Default fallback is true */)">
         This tag is displayed only when the viewport is xs ~ sm.
       </p>
       <p v-if="$bp.equal('lg')">

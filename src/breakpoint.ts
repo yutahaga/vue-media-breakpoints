@@ -53,35 +53,35 @@ export class BreakPointManager<T extends BreakPointsOption> {
     return this.vm.$data.width
   }
 
-  public above(bp: keyof T, ssrFallback: boolean = false) {
+  public above(bp: keyof T, ssrFallback: boolean = true) {
     if (isServer) {
       return ssrFallback
     }
     return this.width > this.options.breakPoints[bp]
   }
 
-  public orAbove(bp: keyof T, ssrFallback: boolean = false) {
+  public orAbove(bp: keyof T, ssrFallback: boolean = true) {
     if (isServer) {
       return ssrFallback
     }
     return this.width >= this.options.breakPoints[bp]
   }
 
-  public below(bp: keyof T, ssrFallback: boolean = false) {
+  public below(bp: keyof T, ssrFallback: boolean = true) {
     if (isServer) {
       return ssrFallback
     }
     return this.width < this.options.breakPoints[bp]
   }
 
-  public orBelow(bp: keyof T, ssrFallback: boolean = false) {
+  public orBelow(bp: keyof T, ssrFallback: boolean = true) {
     if (isServer) {
       return ssrFallback
     }
     return this.width <= this.options.breakPoints[bp]
   }
 
-  public equal(bp: keyof T | Array<keyof T>, ssrFallback: boolean = false) {
+  public equal(bp: keyof T | Array<keyof T>, ssrFallback: boolean = true) {
     if (isServer) {
       return ssrFallback
     }
@@ -91,7 +91,7 @@ export class BreakPointManager<T extends BreakPointsOption> {
     return this.width === this.options.breakPoints[bp]
   }
 
-  public between(bp1: keyof T, bp2: keyof T, ssrFallback: boolean = false) {
+  public between(bp1: keyof T, bp2: keyof T, ssrFallback: boolean = true) {
     if (isServer) {
       return ssrFallback
     }
