@@ -11,6 +11,7 @@
     "lib",
     "dist"
   ],
+  "author": "Yuta Haga <yutahaga7@gmail.com>",
   "homepage": "https://github.com/yutahaga/vue-media-breakpoints",
   "bugs": "https://github.com/yutahaga/vue-media-breakpoints/issues",
   "repository": {
