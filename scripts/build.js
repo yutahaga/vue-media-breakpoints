@@ -2,7 +2,7 @@ const { rollup } = require('rollup')
 const replace = require('rollup-plugin-replace')
 const nodeResolve = require('rollup-plugin-node-resolve')
 const commonjs = require('rollup-plugin-commonjs')
-const { uglify } = require('rollup-plugin-uglify')
+const { terser } = require('rollup-plugin-terser')
 const meta = require('../package.json')
 
 const banner = `/*!
@@ -15,26 +15,21 @@ const banner = `/*!
  * ${meta.homepage}/blob/master/LICENSE
  */`
 
-const name = meta.name.split('/').pop();
+const name = meta.name.split('/').pop()
 
 const configs = [
-  {
-    format: 'es',
-    dest: `dist/${name}.esm.js`
-  },
   {
     format: 'cjs',
     dest: `dist/${name}.cjs.js`
   },
   {
-    format: 'umd',
-    env: 'development',
-    dest: `dist/${name}.js`
+    format: 'es',
+    dest: `dist/${name}.es.js`
   },
   {
     format: 'umd',
     env: 'production',
-    dest: `dist/${name}.min.js`
+    dest: `dist/${name}.js`
   }
 ]
 
@@ -59,7 +54,7 @@ const baseConfig = {
   ]
 }
 
-function build (c) {
+function build(c) {
   const config = Object.assign({}, baseConfig, {
     output: Object.assign({}, baseConfig.output, {
       format: c.format,
@@ -78,14 +73,14 @@ function build (c) {
 
   if (c.env === 'production') {
     config.plugins.push(
-      uglify({
+      terser({
         output: {
           comments: function(node, comment) {
-            if (comment.type === "comment2") {
+            if (comment.type === 'comment2') {
               // multiline comment
-              return /@preserve|@license|@cc_on/i.test(comment.value);
+              return /@preserve|@license|@cc_on/i.test(comment.value)
             }
-            return false;
+            return false
           }
         }
       })

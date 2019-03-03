@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-let _Vue: typeof Vue // tslint:disable-line variable-name
+let VueInstance: (typeof Vue) | null = null
 
 const isServer = typeof window === 'undefined'
 
@@ -107,7 +107,8 @@ export class BreakPointManager<T extends BreakPointsOption> {
   }
 
   private setupVM(): void {
-    this.vm = new _Vue({
+    if (!VueInstance) return
+    this.vm = new VueInstance({
       data: { name: '', width: -1 }
     }) as Vue & { $data: BreakPoint<T> }
   }
@@ -174,17 +175,17 @@ export function install<T extends BreakPointsOption>(
   InjectedVue: typeof Vue,
   options: PluginOptions<T>
 ): void {
-  if (process.env.NODE_ENV !== 'production' && _Vue) {
+  if (process.env.NODE_ENV !== 'production' && VueInstance) {
     throw new Error(
       '[vue-media-breakpoints] Vue Media Break-Points is already installed'
     )
   }
 
-  _Vue = InjectedVue
+  VueInstance = InjectedVue
 
   const bpm = new BreakPointManager<T>(options)
 
-  _Vue.mixin({
+  VueInstance.mixin({
     beforeCreate(this: Vue): void {
       type Component = Vue & {
         $bp: BreakPointManager<T>
