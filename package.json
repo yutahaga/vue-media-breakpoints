@@ -51,7 +51,7 @@
     "lodash.debounce": "4.0.8",
     "prettier": "1.16.4",
     "rimraf": "2.6.3",
-    "rollup": "1.4.1",
+    "rollup": "1.32.1",
     "rollup-plugin-commonjs": "9.2.1",
     "rollup-plugin-node-resolve": "4.0.1",
     "rollup-plugin-replace": "2.1.0",
